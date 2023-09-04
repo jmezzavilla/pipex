@@ -6,7 +6,7 @@
 /*   By: jealves- <jealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 16:47:52 by jealves-          #+#    #+#             */
-/*   Updated: 2023/09/02 17:17:00 by jealves-         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:42:18 by jealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	child(char *file, int fd[2], char *cmd, char **envp)
 	dup2(fin, STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
-	close(fin);
 	execute(cmd, envp);
+	close(fin);
 	close(fd[1]);
 }
 
@@ -37,7 +37,7 @@ void	parent(char *file, int fd[2], char *cmd, char **envp)
 	dup2(fout, STDOUT_FILENO);
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
-	close(fout);
 	execute(cmd, envp);
+	close(fout);
 	close(fd[0]);
 }
